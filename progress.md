@@ -25,7 +25,10 @@ Follow-up prompt: 保留俄语主站，并在 `/en/` 新增英文原版页面；
 - English Lighthouse scores: Performance 98, Accessibility 100, Best Practices 100, SEO 100. Lab metrics: FCP 1.7 s, LCP 2.1 s, TBT 30 ms, CLS 0.
 - Git repository: public `https://github.com/olokojoh/color-dice`, default branch `main`, created and pushed with the local `olokojoh` GitHub account.
 - Cloudflare Pages project: `color-dice` (`color-dice-4uo.pages.dev`), source type `github`, repository `olokojoh/color-dice`, production branch `main`, no build command, output directory `/`, automatic production and preview deployments enabled.
-- Cloudflare zone `колордайс.com` was added to account `cbc3bde77f12dad362c481794bb7e314`. Its assigned nameservers are `terry.ns.cloudflare.com` and `zita.ns.cloudflare.com`; Namecheap was updated from the old nameservers to this pair on 2026-07-12.
+- Cloudflare zone `колордайс.com` is active in account `cbc3bde77f12dad362c481794bb7e314`. Its assigned nameservers are `terry.ns.cloudflare.com` and `zita.ns.cloudflare.com`; Namecheap and the `.com` registry use this pair.
+- The apex Pages custom domain is active. Proxied apex and `www` CNAME records target `color-dice-4uo.pages.dev`; Page Rule `244c375c77ff6dd743b1a96f98c7b1bb` redirects `www` to the apex with HTTP 301 while preserving path/query. HTTP requests redirect to HTTPS.
+- GitHub push `45f7478` triggered production deployment `cce3c4d8-823e-495d-8d4c-f1a68ff05ac6`, which completed successfully. No direct upload deployment was used.
+- Production verification: apex `/`, `/en/`, `/robots.txt`, and `/sitemap.xml` return HTTPS 200; `www` and HTTP requests return the expected 301 redirects.
 
 ## SEO decisions
 
@@ -39,4 +42,3 @@ Follow-up prompt: 保留俄语主站，并在 `/en/` 新增英文原版页面；
 
 - Confirm that the owner controls `hello@colordice.app`; replace the contact address if needed.
 - Before Cloudflare setup, the reference deployment at `https://colordice.vercel.app/` still served the original “Roll Color Dice – Bongo” site; it is not the production target for this repository.
-- Wait for the Git-triggered first Pages deployment and nameserver activation, then attach the apex and `www` custom domains, configure `www` to redirect to the apex, and verify HTTPS, redirects, robots, sitemap, and canonical output.

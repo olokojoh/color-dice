@@ -49,6 +49,8 @@ The intended production origin and all canonical URLs are `https://xn--80ahqbfrb
 
 Production uses the Cloudflare Pages project `color-dice`, linked to the repository's `main` branch. The project has no build command and publishes the repository root (`/`). Every push to `main` triggers a production deployment; pull requests receive preview deployments. The generated Pages hostname is `https://color-dice-4uo.pages.dev`.
 
+The Cloudflare zone is active with `terry.ns.cloudflare.com` and `zita.ns.cloudflare.com`. The apex is the only Pages content domain. Proxied apex and `www` CNAME records target `color-dice-4uo.pages.dev`; an active Cloudflare 301 rule redirects `www` to the apex while preserving the path and query string. HTTP redirects to HTTPS.
+
 The contact page currently uses `hello@colordice.app`. Replace it before launch if that mailbox is not controlled by the site owner. If the deployment origin changes, update canonical, hreflang, Open Graph, JSON-LD, sitemap, and robots URLs together; the full list is in `SEO.md`.
 
 ## Verification
@@ -66,5 +68,6 @@ Verified on 2026-07-12:
 - Final web-game client states reached `mode: ready` with English names on `/en/` and Russian names on `/`, with no console errors.
 - Lighthouse: Performance 99, Accessibility 100, Best Practices 100, SEO 100, with 0 ms total blocking time.
 - English Lighthouse: Performance 98, Accessibility 100, Best Practices 100, SEO 100; FCP 1.7 s, LCP 2.1 s, TBT 30 ms, CLS 0.
+- Production checks: `/`, `/en/`, `/robots.txt`, and `/sitemap.xml` return HTTPS 200 from `xn--80ahqbfrbqm.com`; HTTP redirects to HTTPS and `www` redirects to the apex with 301.
 
 The Lighthouse JSON reports are at `output/lighthouse-final.json` and `output/lighthouse-en.json`; game-client artifacts are under `output/web-game-ru/` and `output/web-game-en/`.
