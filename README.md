@@ -45,13 +45,15 @@ Automated game clients can read `window.render_game_to_text()` and advance the b
 
 ## Production
 
-The intended production origin and all canonical URLs are `https://xn--80ahqbfrbqm.com/` (`колордайс.com`). Production is hosted as a static Cloudflare Pages project linked to the GitHub repository's `main` branch.
+The intended production origin and all canonical URLs are `https://xn--80ahqbfrbqm.com/` (`колордайс.com`). The public source repository is `https://github.com/olokojoh/color-dice`.
+
+Production uses the Cloudflare Pages project `color-dice`, linked to the repository's `main` branch. The project has no build command and publishes the repository root (`/`). Every push to `main` triggers a production deployment; pull requests receive preview deployments. The generated Pages hostname is `https://color-dice-4uo.pages.dev`.
 
 The contact page currently uses `hello@colordice.app`. Replace it before launch if that mailbox is not controlled by the site owner. If the deployment origin changes, update canonical, hreflang, Open Graph, JSON-LD, sitemap, and robots URLs together; the full list is in `SEO.md`.
 
 ## Verification
 
-Verified on 2026-07-11:
+Verified on 2026-07-12:
 
 - `node --check app.js`
 - `xmllint --noout sitemap.xml assets/favicon.svg`
