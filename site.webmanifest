@@ -1,0 +1,19 @@
+{
+  "name": "Колор Дайс - цветные кубики онлайн",
+  "short_name": "Колор Дайс",
+  "description": "Бесплатный генератор случайных цветов в формате виртуальных кубиков.",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1aa8e0",
+  "theme_color": "#1aa8e0",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
