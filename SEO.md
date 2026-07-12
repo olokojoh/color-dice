@@ -62,3 +62,4 @@ If production moves away from `https://xn--80ahqbfrbqm.com`, replace the origin 
 - Core Web Vitals lab values: FCP 1.4 s, LCP 2.1 s, TBT 0 ms, CLS 0.
 - English Lighthouse scores: Performance 98, Accessibility 100, Best Practices 100, SEO 100. Lab values: FCP 1.7 s, LCP 2.1 s, TBT 30 ms, CLS 0.
 - Production delivery: the apex and English routes return HTTPS 200 through Cloudflare Pages, `www` redirects to the canonical apex with 301, and production robots/sitemap responses match their repository files.
+- Google Search Console: `sc-domain:xn--80ahqbfrbqm.com` is DNS-verified; the production sitemap was read successfully on 2026-07-12 and reports four discovered pages.
