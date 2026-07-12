@@ -44,4 +44,5 @@ Follow-up prompt: 保留俄语主站，并在 `/en/` 新增英文原版页面；
 ## Remaining work
 
 - Confirm that the owner controls `hello@colordice.app`; replace the contact address if needed.
+- Backlink outreach is prepared from 509 unique historical success URLs. The live scan produced 450 candidates, and `scripts/outreach_daily.py` caps each day at 20 successful unique domains while syncing `color-dice YYYY-MM-DD` to the shared success workbook. See `OUTREACH.md`.
 - Before Cloudflare setup, the reference deployment at `https://colordice.vercel.app/` still served the original “Roll Color Dice – Bongo” site; it is not the production target for this repository.

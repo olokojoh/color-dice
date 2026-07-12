@@ -55,6 +55,8 @@ Google Search Console uses the domain property `sc-domain:xn--80ahqbfrbqm.com`, 
 
 The contact page currently uses `hello@colordice.app`. Replace it before launch if that mailbox is not controlled by the site owner. If the deployment origin changes, update canonical, hreflang, Open Graph, JSON-LD, sitemap, and robots URLs together; the full list is in `SEO.md`.
 
+The daily backlink outreach campaign and its operating instructions are documented in `OUTREACH.md`.
+
 ## Verification
 
 Verified on 2026-07-12:
