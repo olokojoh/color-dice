@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 from collections import defaultdict
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import quote, urlparse
 
@@ -17,6 +17,7 @@ from google.oauth2 import service_account
 ROOT = Path(os.environ.get("COLOR_DICE_ROOT", Path(__file__).resolve().parents[1]))
 INPUT = Path(os.environ.get("COLOR_DICE_OUTREACH_INPUT", ROOT / "output/outreach/color-dice/drafts/clean.csv"))
 PUBLISH_ROOT = Path(os.environ.get("COLOR_DICE_OUTREACH_OUTPUT", ROOT / "output/outreach/color-dice/publish"))
+PRIORITY_DOMAINS = Path(os.environ.get("COLOR_DICE_PRIORITY_DOMAINS", "/Users/reyn/Downloads/toon-tone.app-Top sites linking to this page-2026-07-13.csv"))
 PUBLISHER = Path("/Users/reyn/.codex/skills/seo-comment-outreach/scripts/semi_auto_comment_publish.py")
 SERVICE_ACCOUNT = Path(os.environ.get("COLOR_DICE_SHEETS_CREDENTIALS", "/Users/reyn/Desktop/data/独立开发/toon-tone/gsc-ga4-auth/gsc-ga4-agent-service-account.json"))
 SPREADSHEET_ID = "1_mSEY-sbLVwU0vRF0KnhoLlxL9enHyDGZU_eWN5I00Q"
@@ -24,7 +25,8 @@ SUCCESS_STATUSES = {"submitted", "manual_submitted"}
 
 
 def host(url):
-    value = (urlparse(url).hostname or "").lower()
+    parsed = urlparse(url if "://" in url else f"https://{url}")
+    value = (parsed.hostname or "").lower()
     return value[4:] if value.startswith("www.") else value
 
 
@@ -49,6 +51,14 @@ def read_logs(day):
     return successes, successful_hosts, attempted_rows, attempts_by_host
 
 
+def priority_ranks():
+    if not PRIORITY_DOMAINS.exists():
+        return {}
+    with PRIORITY_DOMAINS.open(newline="", encoding="utf-8-sig") as handle:
+        rows = csv.DictReader(handle)
+        return {host(row.get("Site", "")): rank for rank, row in enumerate(rows) if host(row.get("Site", ""))}
+
+
 def sheet_session():
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT,
@@ -67,7 +77,7 @@ def sync_sheet(day, urls):
     if title not in titles:
         response = session.post(
             f"{base}:batchUpdate",
-            json={"requests": [{"addSheet": {"properties": {"title": title, "gridProperties": {"rowCount": 100, "columnCount": 1, "frozenRowCount": 1}}}}]},
+            json={"requests": [{"addSheet": {"properties": {"title": title, "gridProperties": {"rowCount": 1000, "columnCount": 1, "frozenRowCount": 1}}}}]},
         )
         response.raise_for_status()
     range_name = quote(f"'{title}'!A1:A1000", safe="")
@@ -85,8 +95,11 @@ def sync_sheet(day, urls):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--target", type=int, default=20)
+    parser.add_argument("--end-hour", type=int, default=9)
     args = parser.parse_args()
+    if datetime.now().hour >= args.end_hour:
+        print(f"Outside outreach window; next run starts at 00:00 and ends at {args.end_hour:02d}:00.")
+        return 0
     PUBLISH_ROOT.mkdir(parents=True, exist_ok=True)
     lock_path = PUBLISH_ROOT / "daily.lock"
     with lock_path.open("w") as lock:
@@ -101,14 +114,17 @@ def main():
         out_dir.mkdir(parents=True, exist_ok=True)
         with INPUT.open(newline="", encoding="utf-8-sig") as handle:
             rows = list(csv.DictReader(handle))
+        ranks = priority_ranks()
+        rows = sorted(enumerate(rows, 1), key=lambda item: (ranks.get(host(item[1].get("url", "")), len(ranks) + 1), item[0]))
 
         successes, successful_hosts, attempted_rows, attempts_by_host = read_logs(day)
         sync_sheet(day, list(successes.values()))
-        print(f"Starting {day}: {len(successes)}/{args.target} successful domains")
-        if len(successes) >= args.target:
-            return 0
+        print(f"Starting {day}: {len(successes)} successful domains today; {len(successful_hosts)} completed across all runs")
 
-        for row_number, row in enumerate(rows, 1):
+        for row_number, row in rows:
+            if datetime.now().hour >= args.end_hour:
+                print(f"Reached {args.end_hour:02d}:00; stopping before the next domain.")
+                return 0
             row_id = row.get("global_row_index", "") or str(row_number)
             source_host = host(row.get("url", ""))
             if source_host in successful_hosts or row_id in attempted_rows or len(attempts_by_host[source_host]) >= 3:
@@ -134,10 +150,8 @@ def main():
             subprocess.run(command, cwd=ROOT, check=False)
             successes, successful_hosts, attempted_rows, attempts_by_host = read_logs(day)
             sync_sheet(day, list(successes.values()))
-            print(f"Progress {day}: {len(successes)}/{args.target} successful domains")
-            if len(successes) >= args.target:
-                return 0
-        print(f"Candidate pool exhausted at {len(successes)}/{args.target} successful domains.")
+            print(f"Progress {day}: {len(successes)} successful domains today; {len(successful_hosts)} completed across all runs")
+        print(f"Candidate pool exhausted with {len(successes)} successful domains today.")
         return 0
 
 
