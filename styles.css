@@ -55,10 +55,6 @@ body {
   line-height: 1.65;
 }
 
-body.is-gated {
-  overflow: hidden;
-}
-
 button,
 select,
 input {
@@ -222,91 +218,6 @@ a {
   --select-text: #f5c842;
 }
 
-.start-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  display: none;
-  place-items: center;
-  padding: 24px;
-  background: var(--stage-bg);
-  transition: opacity 420ms ease, transform 420ms ease;
-}
-
-.js .start-screen {
-  display: grid;
-}
-
-.start-screen::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.1), transparent 44%);
-  pointer-events: none;
-}
-
-.start-screen.is-hidden {
-  opacity: 0;
-  transform: scale(1.04);
-  pointer-events: none;
-}
-
-.start-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  text-align: center;
-  animation: start-in 560ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-@keyframes start-in {
-  from { opacity: 0; transform: translateY(24px) scale(0.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.start-title {
-  color: #fff;
-  font-family: var(--display-font);
-  font-size: 72px;
-  line-height: 0.95;
-  text-shadow: 4px 6px 0 rgba(0, 72, 151, 0.48);
-}
-
-.start-subtitle {
-  margin: -5px 0 0;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.start-button {
-  min-width: 408px;
-  min-height: 102px;
-  padding: 20px 40px;
-  border: 0;
-  border-radius: 20px;
-  color: #d94d00;
-  background: #fdd835;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.24), inset 0 2px 0 rgba(255, 255, 255, 0.52);
-  cursor: pointer;
-  font-family: var(--display-font);
-  font-size: 42px;
-  line-height: 1;
-  transition: transform 130ms ease, filter 180ms ease, box-shadow 180ms ease;
-}
-
-.start-button:hover {
-  filter: brightness(1.07);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.28), inset 0 2px 0 rgba(255, 255, 255, 0.52);
-}
-
-.start-button:active {
-  transform: scale(0.97);
-}
-
 .game-stage {
   position: relative;
   z-index: 0;
@@ -346,19 +257,6 @@ a {
   z-index: 30;
   display: flex;
   gap: 8px;
-}
-
-body.is-gated .game-stage {
-  z-index: auto;
-}
-
-body.is-gated .game-toolbar {
-  left: auto;
-  z-index: 510;
-}
-
-body.is-gated .game-toolbar > :not(#language-wrap) {
-  display: none;
 }
 
 .toolbar-button {
@@ -484,50 +382,6 @@ body.is-gated .game-toolbar > :not(#language-wrap) {
 .language-menu a span {
   color: var(--stage-muted);
   font-size: 11px;
-}
-
-.player-menu {
-  width: 230px;
-  padding: 14px;
-  font-size: 12px;
-}
-
-.player-menu p,
-.player-menu label {
-  margin: 0 0 7px;
-}
-
-.player-stat {
-  color: var(--stage-muted);
-}
-
-.player-menu input {
-  width: 100%;
-  height: 36px;
-  margin: 2px 0 7px;
-  padding: 0 10px;
-  border: 1px solid var(--control-border);
-  border-radius: 6px;
-  color: #102a43;
-  background: #fff;
-  text-transform: uppercase;
-}
-
-.player-check {
-  width: 100%;
-  min-height: 34px;
-  border: 0;
-  border-radius: 6px;
-  color: #7c2d12;
-  background: #fdd835;
-  cursor: pointer;
-  font-family: var(--display-font);
-}
-
-.player-result {
-  min-height: 20px;
-  margin-top: 8px !important;
-  color: var(--stage-muted);
 }
 
 .game-layout {
@@ -1426,6 +1280,10 @@ body.is-gated .game-toolbar > :not(#language-wrap) {
   color: #fdd835 !important;
 }
 
+.modes-band .text-link-line {
+  color: #d7e7f4;
+}
+
 .mode-list {
   display: grid;
   gap: 1px;
@@ -2011,6 +1869,10 @@ body.is-gated .game-toolbar > :not(#language-wrap) {
     font-size: 40px;
   }
 
+  html[lang="ru"] .legal-page .article-hero h1 {
+    font-size: 32px;
+  }
+
   .article-lead {
     font-size: 18px;
   }
@@ -2093,23 +1955,6 @@ body.is-gated .game-toolbar > :not(#language-wrap) {
 }
 
 @media (max-width: 560px) {
-  .start-title {
-    font-size: 48px;
-  }
-
-  .start-subtitle {
-    font-size: 13px;
-  }
-
-  .start-button {
-    min-width: 0;
-    width: min(100%, 340px);
-    min-height: 76px;
-    padding: 18px 22px;
-    border-radius: 16px;
-    font-size: 28px;
-  }
-
   .game-stage {
     padding: 76px 10px 26px;
   }

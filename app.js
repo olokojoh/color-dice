@@ -8,7 +8,7 @@
     emptyDie: (index) => `Die ${index}: color not rolled yet`,
     resultDie: (index, name) => `Die ${index}: ${name.toLowerCase()}`,
     hiddenDie: (index) => `Die ${index}: result hidden`,
-    rollMessages: ["GOOD LUCK!", "ROLLING...", "WHAT WILL YOU GET?", "HERE WE GO!", "PICK A COLOR!"],
+    rollMessages: ["ROLLING...", "CHOOSING COLORS...", "DICE IN MOTION", "ONE MOMENT", "NEW COLORS"],
     scratchWord: "SCRATCH",
     scratchComplete: "All colors revealed",
     scratchProgress: (revealed, total) => `Revealed ${revealed} of ${total}`,
@@ -16,10 +16,6 @@
     scratchResult: (index, name) => `Scratch card ${index}: ${name.toLowerCase()}`,
     sound: "Sound",
     muted: "Muted",
-    enterCode: "Enter a player code",
-    playerNotFound: "Player not found",
-    noRolls: "no rolls yet",
-    playerStatus: (result) => `You are online. Last result: ${result}`,
     resetResult: "PRESS THE BUTTON TO ROLL"
   } : {
     colors: { red: "Красный", orange: "Оранжевый", yellow: "Жёлтый", green: "Зелёный", blue: "Синий", purple: "Фиолетовый" },
@@ -27,7 +23,7 @@
     emptyDie: (index) => `Кубик ${index}: цвет ещё не выбран`,
     resultDie: (index, name) => `Кубик ${index}: ${name.toLowerCase()}`,
     hiddenDie: (index) => `Кубик ${index}: результат скрыт`,
-    rollMessages: ["УДАЧИ!", "БРОСАЕМ...", "ЧТО ВЫПАДЕТ?", "ПОЕХАЛИ!", "ЛОВИ ЦВЕТ!"],
+    rollMessages: ["БРОСОК...", "ВЫБИРАЕМ ЦВЕТА...", "КУБИКИ В ДВИЖЕНИИ", "ОДНУ СЕКУНДУ", "НОВАЯ КОМБИНАЦИЯ"],
     scratchWord: "СКРЕТЧ",
     scratchComplete: "Все цвета открыты",
     scratchProgress: (revealed, total) => `Открыто ${revealed} из ${total}`,
@@ -35,10 +31,6 @@
     scratchResult: (index, name) => `Скретч-карта ${index}: ${name.toLowerCase()}`,
     sound: "Звук",
     muted: "Без звука",
-    enterCode: "Введите код игрока",
-    playerNotFound: "Игрок не найден",
-    noRolls: "бросков пока нет",
-    playerStatus: (result) => `Вы онлайн. Последний результат: ${result}`,
     resetResult: "НАЖМИТЕ КНОПКУ, ЧТОБЫ БРОСИТЬ"
   };
 
@@ -67,8 +59,6 @@
 
   const elements = {
     stage: document.querySelector(".game-stage"),
-    startScreen: document.querySelector("#start-screen"),
-    startButton: document.querySelector("#start-button"),
     diceCount: document.querySelector("#dice-count"),
     diceArea: document.querySelector("#dice-area"),
     lastResult: document.querySelector("#last-result"),
@@ -93,17 +83,9 @@
     themeLabel: document.querySelector("#theme-label"),
     themeMenu: document.querySelector("#theme-menu"),
     themeWrap: document.querySelector("#theme-wrap"),
-    playerToggle: document.querySelector("#player-toggle"),
-    playerMenu: document.querySelector("#player-menu"),
-    playerWrap: document.querySelector("#player-wrap"),
     languageToggle: document.querySelector("#language-toggle"),
     languageMenu: document.querySelector("#language-menu"),
     languageWrap: document.querySelector("#language-wrap"),
-    playerCode: document.querySelector("#player-code"),
-    playerCodeInput: document.querySelector("#player-code-input"),
-    playerCheck: document.querySelector("#player-check"),
-    playerResult: document.querySelector("#player-result"),
-    rollCount: document.querySelector("#roll-count"),
     backgroundCanvas: document.querySelector("#background-canvas")
   };
 
@@ -117,30 +99,20 @@
   }
 
   const state = {
-    mode: "start",
-    started: false,
+    mode: "ready",
+    started: true,
     busy: false,
     diceCount: 3,
     currentResults: storedResults,
     rollCount: Number.parseInt(localStorage.getItem("kolor_dais_roll_count") || "0", 10) || 0,
     muted: localStorage.getItem("kolor_dais_sound") === "off",
     theme: localStorage.getItem("kolor_dais_theme") || "blue",
-    playerCode: localStorage.getItem("kolor_dais_player_code") || createPlayerCode(),
     scratchRevealed: 0,
     scratchTotal: 0,
     scratchResults: []
   };
 
   let audioContext;
-
-  function createPlayerCode() {
-    const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    const values = new Uint8Array(6);
-    crypto.getRandomValues(values);
-    const code = Array.from(values, (value) => alphabet[value % alphabet.length]).join("");
-    localStorage.setItem("kolor_dais_player_code", code);
-    return code;
-  }
 
   function randomColors(count) {
     const result = [];
@@ -239,7 +211,6 @@
       localStorage.setItem("kolor_dais_roll_count", String(state.rollCount));
     }
 
-    updatePlayerPanel();
   }
 
   async function rollDice() {
@@ -497,10 +468,8 @@
 
   function closeMenus() {
     elements.themeMenu.classList.remove("is-open");
-    elements.playerMenu.classList.remove("is-open");
     elements.languageMenu.classList.remove("is-open");
     elements.themeToggle.setAttribute("aria-expanded", "false");
-    elements.playerToggle.setAttribute("aria-expanded", "false");
     elements.languageToggle.setAttribute("aria-expanded", "false");
   }
 
@@ -523,40 +492,6 @@
     });
     localStorage.setItem("kolor_dais_theme", theme);
     closeMenus();
-  }
-
-  function updatePlayerPanel() {
-    elements.playerCode.textContent = state.playerCode;
-    elements.rollCount.textContent = String(state.rollCount);
-  }
-
-  function checkPlayerCode() {
-    const code = elements.playerCodeInput.value.trim().toUpperCase();
-    if (!code) {
-      elements.playerResult.textContent = copy.enterCode;
-      return;
-    }
-    if (code !== state.playerCode) {
-      elements.playerResult.textContent = copy.playerNotFound;
-      return;
-    }
-    const result = state.currentResults.length ? state.currentResults.map((color) => color.name).join(", ") : copy.noRolls;
-    elements.playerResult.textContent = copy.playerStatus(result);
-  }
-
-  async function startGame() {
-    if (state.started) return;
-    state.started = true;
-    elements.startButton.disabled = true;
-    state.mode = "ready";
-    playTone(330, 0.12, 0, "triangle");
-    playTone(520, 0.16, 0.12, "triangle");
-    elements.startScreen.classList.add("is-hidden");
-    document.body.classList.remove("is-gated");
-    await wait(340);
-    await rollDice();
-    await wait(120);
-    elements.startScreen.hidden = true;
   }
 
   const canvasContext = elements.backgroundCanvas.getContext("2d");
@@ -650,7 +585,6 @@
     scratch: state.mode === "scratch" ? { revealed: state.scratchRevealed, total: state.scratchTotal } : null
   });
 
-  elements.startButton.addEventListener("click", startGame);
   elements.rollButton.addEventListener("click", rollDice);
   elements.megaButton.addEventListener("click", megaRoll);
   elements.megaClose.addEventListener("click", closeMegaRoll);
@@ -658,15 +592,7 @@
   elements.scratchClose.addEventListener("click", closeScratchRoll);
   elements.soundToggle.addEventListener("click", toggleSound);
   elements.themeToggle.addEventListener("click", () => toggleMenu(elements.themeMenu, elements.themeToggle));
-  elements.playerToggle.addEventListener("click", () => toggleMenu(elements.playerMenu, elements.playerToggle));
   elements.languageToggle.addEventListener("click", () => toggleMenu(elements.languageMenu, elements.languageToggle));
-  elements.playerCheck.addEventListener("click", checkPlayerCode);
-  elements.playerCodeInput.addEventListener("input", () => {
-    elements.playerCodeInput.value = elements.playerCodeInput.value.toUpperCase();
-  });
-  elements.playerCodeInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") checkPlayerCode();
-  });
   elements.diceCount.addEventListener("change", () => {
     state.diceCount = Number.parseInt(elements.diceCount.value, 10);
     state.currentResults = [];
@@ -678,7 +604,7 @@
   });
 
   document.addEventListener("click", (event) => {
-    if (!elements.themeWrap.contains(event.target) && !elements.playerWrap.contains(event.target) && !elements.languageWrap.contains(event.target)) closeMenus();
+    if (!elements.themeWrap.contains(event.target) && !elements.languageWrap.contains(event.target)) closeMenus();
   });
 
   document.addEventListener("keydown", async (event) => {
@@ -706,11 +632,10 @@
   });
   backgroundResizeObserver.observe(elements.stage);
 
-  document.body.classList.add("is-gated");
   applyTheme(state.theme);
   updateSoundButton();
-  updatePlayerPanel();
   renderDice();
+  if (storedResults.length) applyResults(storedResults, false);
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     window.requestAnimationFrame(backgroundFrame);
   }

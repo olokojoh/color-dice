@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Color Dice Roller - Roll Random Colors Online for Free</title>
+  <title>Color Dice Roller: Roll Random Colors Online for Free</title>
   <meta name="description" content="Roll up to six color dice online for games, lessons, art prompts, and quick choices. Get fair random color results instantly, for free and without signing up.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#1aa8e0">
@@ -16,9 +16,9 @@
   <link rel="preload" href="/assets/fonts/lilita-one.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="/styles.css?v=20260712-2">
+  <link rel="stylesheet" href="/styles.css?v=20260716-1">
 
-  <meta property="og:title" content="Color Dice Roller - Roll Random Colors Online">
+  <meta property="og:title" content="Color Dice Roller: Roll Random Colors Online">
   <meta property="og:description" content="Roll one to six color dice and get an instant random color combination for games, lessons, art, and everyday choices.">
   <meta property="og:url" content="https://xn--80ahqbfrbqm.com/en/">
   <meta property="og:type" content="website">
@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Color Dice roller showing three random color dice">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Color Dice Roller - Random Colors Online">
+  <meta name="twitter:title" content="Color Dice Roller: Random Colors Online">
   <meta name="twitter:description" content="Roll up to six color dice and reveal a random combination instantly.">
   <meta name="twitter:image" content="https://xn--80ahqbfrbqm.com/assets/color-dice-og.jpg">
   <meta name="twitter:image:alt" content="Color Dice roller showing three random color dice">
@@ -75,7 +75,7 @@
             "name": "How do I roll color dice online?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Choose between one and six dice, then press Roll Again. The random colors appear immediately."
+              "text": "Choose between one and six dice, then press \"Roll Again.\" The random colors appear after a short animation."
             }
           },
           {
@@ -119,14 +119,6 @@
 <body class="theme-blue">
   <a class="skip-link" href="#main-content">Skip to the guide</a>
 
-  <div class="start-screen" id="start-screen">
-    <div class="start-content">
-      <div class="start-title">COLOR DICE</div>
-      <p class="start-subtitle">RANDOM COLOR DICE ROLLER</p>
-      <button class="start-button" id="start-button" type="button">ROLL THE DICE <span aria-hidden="true">🎲</span></button>
-    </div>
-  </div>
-
   <section class="game-stage" id="tool" aria-labelledby="game-title">
     <div class="background-glow" aria-hidden="true"></div>
     <canvas class="background-canvas" id="background-canvas" aria-hidden="true"></canvas>
@@ -151,21 +143,8 @@
         </div>
       </div>
 
-      <div class="menu-wrap" id="player-wrap">
-        <button class="toolbar-button" id="player-toggle" type="button" aria-haspopup="dialog" aria-expanded="false">
-          <span aria-hidden="true">🔎</span> Player
-        </button>
-        <div class="toolbar-menu player-menu" id="player-menu">
-          <p>Your code: <strong id="player-code">...</strong></p>
-          <p class="player-stat">Rolls: <strong id="roll-count">0</strong></p>
-          <label for="player-code-input">Check a code</label>
-          <input id="player-code-input" type="text" maxlength="6" autocomplete="off" placeholder="Enter code">
-          <button class="player-check" id="player-check" type="button">Check</button>
-          <p class="player-result" id="player-result" aria-live="polite"></p>
-        </div>
-      </div>
       <div class="menu-wrap" id="language-wrap">
-        <button class="toolbar-button" id="language-toggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Choose language">
+        <button class="toolbar-button" id="language-toggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="🌐 EN: choose language">
           <span aria-hidden="true">🌐</span> EN
         </button>
         <div class="toolbar-menu language-menu" id="language-menu" role="menu" aria-label="Language">
@@ -176,21 +155,21 @@
     </div>
 
     <div class="roll-overlay" id="roll-overlay" aria-hidden="true">
-      <p class="overlay-title" id="roll-message">GOOD LUCK!</p>
+      <p class="overlay-title" id="roll-message">ROLLING...</p>
       <div class="ghost-dice" id="ghost-dice" aria-hidden="true"></div>
       <div class="ticker" aria-hidden="true"><span>✦ COLOR DICE ✦ RANDOM COLORS ✦ COLOR DICE ✦ RANDOM COLORS ✦</span></div>
     </div>
 
     <div class="mega-overlay" id="mega-overlay" aria-hidden="true">
       <p class="mega-title">⚡ MEGA ROLL ⚡</p>
-      <p class="mega-subtitle">ULTIMATE LUCK</p>
+      <p class="mega-subtitle">COLORS ONE BY ONE</p>
       <div class="mega-dice-row" id="mega-dice-row"></div>
       <div class="mega-progress" id="mega-progress" aria-hidden="true"></div>
       <button class="overlay-close" id="mega-close" type="button" disabled>✓ Done</button>
     </div>
 
     <div class="scratch-overlay" id="scratch-overlay" aria-hidden="true">
-      <p class="scratch-title">🪙 SCRATCH &amp; WIN</p>
+      <p class="scratch-title">🪙 SCRATCH REVEAL</p>
       <p class="scratch-hint">Scratch to reveal your colors</p>
       <div class="scratch-row" id="scratch-row"></div>
       <div class="scratch-progress-wrap">
@@ -230,7 +209,7 @@
         <p class="game-mark">✦ COLOR DICE ✦</p>
         <p class="last-result" id="last-result">PRESS THE BUTTON TO ROLL</p>
 
-        <button class="game-button roll-button" id="roll-button" type="button">ROLL AGAIN!</button>
+        <button class="game-button roll-button" id="roll-button" type="button">ROLL AGAIN</button>
         <button class="game-button mega-button" id="mega-button" type="button"><span aria-hidden="true">⚡</span> MEGA ROLL <span aria-hidden="true">⚡</span></button>
         <button class="game-button scratch-button" id="scratch-button" type="button"><span aria-hidden="true">🪙</span> SCRATCH CARD</button>
 
@@ -240,12 +219,12 @@
       <aside class="color-legend" aria-labelledby="legend-title">
         <h2 id="legend-title">COLORS</h2>
         <ul>
-          <li><span class="color-swatch red" aria-hidden="true"></span><span><strong>Red</strong><small>❌ Fail Trade</small></span></li>
-          <li><span class="color-swatch orange" aria-hidden="true"></span><span><strong>Orange</strong><small>🙅 No Thanks</small></span></li>
-          <li><span class="color-swatch yellow" aria-hidden="true"></span><span><strong>Yellow</strong><small>🤝 Deal?</small></span></li>
-          <li><span class="color-swatch green" aria-hidden="true"></span><span><strong>Green</strong><small>✅ Fair Trade</small></span></li>
-          <li><span class="color-swatch blue" aria-hidden="true"></span><span><strong>Blue</strong><small>📄 Last Offer</small></span></li>
-          <li><span class="color-swatch purple" aria-hidden="true"></span><span><strong>Purple</strong><small>➕ Add More</small></span></li>
+          <li><span class="color-swatch red" aria-hidden="true"></span><span><strong>Red</strong><small>❌ Stop</small></span></li>
+          <li><span class="color-swatch orange" aria-hidden="true"></span><span><strong>Orange</strong><small>🙅 Choose again</small></span></li>
+          <li><span class="color-swatch yellow" aria-hidden="true"></span><span><strong>Yellow</strong><small>🤝 Your choice</small></span></li>
+          <li><span class="color-swatch green" aria-hidden="true"></span><span><strong>Green</strong><small>✅ Go ahead</small></span></li>
+          <li><span class="color-swatch blue" aria-hidden="true"></span><span><strong>Blue</strong><small>📄 Another turn</small></span></li>
+          <li><span class="color-swatch purple" aria-hidden="true"></span><span><strong>Purple</strong><small>➕ Add one</small></span></li>
         </ul>
       </aside>
     </div>
@@ -264,32 +243,32 @@
 
     <section class="content-band intro-band">
       <div class="content-container prose-lead">
-        <p class="eyebrow">FREE RANDOM COLOR GENERATOR</p>
+        <p class="eyebrow">RANDOM COLORS ONLINE</p>
         <h2>Roll color dice online</h2>
-        <p><strong>Color Dice</strong> is a free online roller that turns a random color pick into a quick, visual dice roll. Choose one to six dice and each die will land on red, orange, yellow, green, blue, or purple. Use the result as a game move, a classroom prompt, an art palette, or an impartial way to choose between six options.</p>
-        <p>There is nothing to install and no account to create. The roller works in your browser on desktop and mobile, and a fresh combination is ready whenever you press the button. Because each die is rolled separately, you can use one color for a simple choice or build a longer sequence for a group activity.</p>
+        <p><strong>Color Dice</strong> puts a random color picker into a familiar dice roll. Choose one to six dice. Each die lands on red, orange, yellow, green, blue, or purple. The result can decide a game move, classroom task, art palette, or any choice with up to six options.</p>
+        <p>The roller runs in your browser on desktop and mobile. You do not need to install anything or create an account. One die handles a single choice, while several dice make a sequence for a group activity or a set of colors for a project.</p>
       </div>
     </section>
 
     <section class="content-band" id="how-to-use">
       <div class="content-container">
-        <p class="eyebrow">START IN SECONDS</p>
+        <p class="eyebrow">YOUR FIRST ROLL</p>
         <h2>How to use the color dice roller</h2>
         <div class="steps-grid">
           <article>
             <span class="step-number">01</span>
             <h3>Choose your dice</h3>
-            <p>Select anywhere from one to six color dice. One die gives you one decision, while several dice create a sequence, team assignment, or compact color palette.</p>
+            <p>Select one to six color dice. Use one die for one decision, or several dice for a sequence, team assignment, or small palette.</p>
           </article>
           <article>
             <span class="step-number">02</span>
             <h3>Roll for colors</h3>
-            <p>Press “Roll Again” to reveal every selected die at once. You can also use Mega Roll for a slower reveal or Scratch Card to uncover each result yourself.</p>
+            <p>Press &quot;Roll Again&quot; to reveal every selected die at once. Mega Roll reveals the dice in order, while Scratch Card lets you uncover each result yourself.</p>
           </article>
           <article>
             <span class="step-number">03</span>
             <h3>Follow your rules</h3>
-            <p>Read the dice from left to right and apply the meanings you chose before rolling. Press the button again whenever your game or activity needs a new result.</p>
+            <p>Read the dice from left to right and use the meanings you set before the roll. Press the button again when the next turn needs a new result.</p>
           </article>
         </div>
       </div>
@@ -297,44 +276,44 @@
 
     <section class="content-band count-guide-band" id="dice-count-guide">
       <div class="content-container">
-        <p class="eyebrow">ONE DIE OR A FULL SET</p>
+        <p class="eyebrow">CHOOSE THE NUMBER OF DICE</p>
         <h2>How many color dice should you roll?</h2>
-        <p class="section-intro">Pick the number of dice to match the job. A single random color is easy to act on, while multiple dice are useful when order, teams, or a palette matters.</p>
+        <p class="section-intro">Pick the number of dice before you roll. A single color works for one decision. Use several dice when order, teams, or a palette matters.</p>
         <div class="steps-grid count-grid">
           <article>
             <span class="step-number">1</span>
             <h3>One die for one choice</h3>
-            <p>Use one color die when you need a single action, player, topic, or category. Assign one option to each color before the roll, then accept the color that appears.</p>
+            <p>Use one color die for a single action, player, topic, or category. Assign one option to each color before the roll, then follow the option that appears.</p>
           </article>
           <article>
             <span class="step-number">2-3</span>
             <h3>Two or three for a sequence</h3>
-            <p>Combine results to make a short prompt. The first die might choose a subject, the second an action, and the third a difficulty level or time limit.</p>
+            <p>Combine the results into a short prompt. The first die can choose a subject, the second an action, and the third a difficulty level or time limit.</p>
           </article>
           <article>
             <span class="step-number">4-6</span>
             <h3>Four to six for groups</h3>
-            <p>Roll a larger set to assign colors to players, fill several spaces on a board, or sketch out a random palette. Give each person one die or use the results in order.</p>
+            <p>Use a larger set to assign colors to players, fill spaces on a board, or make a random palette. Give each person one die or read the results in order.</p>
           </article>
         </div>
-        <p class="count-guide-note">A color can appear more than once in the same roll. That does not make the roll less random: each die has its own equal chance of landing on any of the six colors. Decide in advance whether a repeat means doing an action twice, making that color more important, or rerolling only the duplicate.</p>
+        <p class="count-guide-note">A color can appear more than once in a roll because the dice are independent. Decide what repeats mean before anyone rolls. You can do an action twice, give that color more weight, or reroll only the duplicate.</p>
       </div>
     </section>
 
     <section class="content-band color-values-band" id="color-values">
       <div class="content-container">
-        <p class="eyebrow">GIVE EACH COLOR A JOB</p>
+        <p class="eyebrow">SET THE COLOR RULES</p>
         <h2>Ideas for color dice meanings</h2>
-        <p class="section-intro">The roller does not force one rule set. You can attach any six answers or actions to the colors. These simple meanings are a useful starting point for a game:</p>
+        <p class="section-intro">The colors do not have fixed meanings. Attach any six answers or actions that suit your game. This set works as a starting point:</p>
         <div class="color-grid">
-          <article class="red-accent"><span class="large-swatch red" aria-hidden="true"></span><h3>Red</h3><p>Stop, skip a turn, or take the boldest challenge.</p></article>
-          <article class="orange-accent"><span class="large-swatch orange" aria-hidden="true"></span><h3>Orange</h3><p>Switch direction, choose again, or try a different approach.</p></article>
-          <article class="yellow-accent"><span class="large-swatch yellow" aria-hidden="true"></span><h3>Yellow</h3><p>Make your own choice, pause, or add a creative twist.</p></article>
-          <article class="green-accent"><span class="large-swatch green" aria-hidden="true"></span><h3>Green</h3><p>Go ahead, score a success, or complete an easy task.</p></article>
-          <article class="blue-accent"><span class="large-swatch blue" aria-hidden="true"></span><h3>Blue</h3><p>Take another chance, answer a question, or choose a calm action.</p></article>
-          <article class="purple-accent"><span class="large-swatch purple" aria-hidden="true"></span><h3>Purple</h3><p>Add a bonus, raise the difficulty, or extend the combination.</p></article>
+          <article class="red-accent"><span class="large-swatch red" aria-hidden="true"></span><h3>Red</h3><p>Stop, skip a turn, or take the harder task.</p></article>
+          <article class="orange-accent"><span class="large-swatch orange" aria-hidden="true"></span><h3>Orange</h3><p>Switch direction, choose again, or use another method.</p></article>
+          <article class="yellow-accent"><span class="large-swatch yellow" aria-hidden="true"></span><h3>Yellow</h3><p>Let the player choose, pause, or make up a new move.</p></article>
+          <article class="green-accent"><span class="large-swatch green" aria-hidden="true"></span><h3>Green</h3><p>Continue, score a success, or complete an easy task.</p></article>
+          <article class="blue-accent"><span class="large-swatch blue" aria-hidden="true"></span><h3>Blue</h3><p>Take another turn, answer a question, or choose a quiet action.</p></article>
+          <article class="purple-accent"><span class="large-swatch purple" aria-hidden="true"></span><h3>Purple</h3><p>Add a bonus, raise the difficulty, or extend the sequence.</p></article>
         </div>
-        <p class="text-link-line">Write your color key down before anyone rolls. Clear rules keep the result neutral and make repeated rounds much easier to follow.</p>
+        <p class="text-link-line">Write down the color key before anyone rolls. That keeps the rule the same for every player and every round.</p>
       </div>
     </section>
 
@@ -345,15 +324,15 @@
         <div class="mode-list">
           <article>
             <div class="mode-icon yellow-mode" aria-hidden="true">🎲</div>
-            <div><h3>Regular roll</h3><p>Reveal all selected color dice together. This is the fastest choice for repeated turns, classroom rotations, and quick decisions.</p></div>
+            <div><h3>Regular roll</h3><p>Reveal all selected color dice together. Use this mode for repeated turns, classroom rotations, and quick decisions.</p></div>
           </article>
           <article>
             <div class="mode-icon purple-mode" aria-hidden="true">⚡</div>
-            <div><h3>Mega Roll</h3><p>Watch the dice arrive and reveal their colors one by one. Use it for a final round or any moment that deserves a little more suspense.</p></div>
+            <div><h3>Mega Roll</h3><p>The dice arrive and reveal their colors one by one. It works well for a final round.</p></div>
           </article>
           <article>
             <div class="mode-icon green-mode" aria-hidden="true">🪙</div>
-            <div><h3>Scratch Card</h3><p>Each random color starts under a silver cover. Scratch with a mouse or finger, or focus a card and press Enter, to uncover every result.</p></div>
+            <div><h3>Scratch Card</h3><p>Each color starts under a silver cover. Scratch it with a mouse or finger. Keyboard users can focus a card and press Enter or Space.</p></div>
           </article>
         </div>
       </div>
@@ -362,16 +341,16 @@
     <section class="content-band use-cases-band" id="uses">
       <div class="content-container two-column-copy">
         <div>
-          <p class="eyebrow">PLAY, TEACH, OR CREATE</p>
+        <p class="eyebrow">IDEAS FOR EACH ROLL</p>
           <h2>Ways to use a random color dice roller</h2>
         </div>
         <div class="prose-columns">
-          <p><strong>Classroom activities.</strong> Match each color with a kind of task such as reading, speaking, drawing, moving, reviewing, or asking a question. A roll changes the activity without putting the choice on one student.</p>
-          <p><strong>Art prompts.</strong> Roll several dice to choose the main colors for a drawing, collage, character, bead pattern, or pixel-art piece. Repeats can tell you which colors should dominate the finished work.</p>
-          <p><strong>Board and party games.</strong> Let colors represent teams, resources, spaces, actions, or question categories. An online color die is handy when a physical die is missing or when everyone needs to see the same result.</p>
-          <p><strong>Movement breaks.</strong> Assign an exercise to each color, then roll between work sessions. Red might mean jumping jacks, green stretching, and blue a short rest. Keep repetitions in a separate rule.</p>
-          <p><strong>Quick choices.</strong> Map six equally acceptable options to the six colors. Rolling makes the selection impartial, but it works best when everyone agrees to the mapping before seeing the result.</p>
-          <p><strong>Story and writing games.</strong> Use one die for a character mood, another for a location, and a third for an event. Color-coded prompt lists can produce a large number of combinations from a small set of ideas.</p>
+          <p><strong>Classroom activities.</strong> Match colors with reading, speaking, drawing, movement, review, or a question. One roll picks the next task without putting the choice on a student.</p>
+          <p><strong>Art prompts.</strong> Roll several dice for a drawing, collage, character, bead pattern, or pixel-art palette. A repeated color can take up more space in the finished work.</p>
+          <p><strong>Board and party games.</strong> Let the colors stand for teams, resources, spaces, actions, or question categories. The online roller can replace a missing physical die and gives everyone the same visible result.</p>
+          <p><strong>Movement breaks.</strong> Assign an exercise to each color and roll between work sessions. Red could mean jumping jacks, green stretching, and blue a short rest. Set repetitions separately.</p>
+          <p><strong>Quick choices.</strong> Map six acceptable options to the colors. Agree on the mapping first, then use the color that appears.</p>
+          <p><strong>Story and writing games.</strong> Use one die for a character's mood, another for a location, and a third for an event. A small set of color-coded lists can produce many prompts.</p>
         </div>
       </div>
     </section>
@@ -382,10 +361,10 @@
           <span class="mini-die red">•</span><span class="mini-die yellow">•</span><span class="mini-die green">•</span><span class="mini-die blue">•</span><span class="mini-die purple">•</span><span class="mini-die orange">•</span>
         </div>
         <div>
-          <p class="eyebrow">INDEPENDENT RANDOM RESULTS</p>
+          <p class="eyebrow">HOW THE COLORS ARE CHOSEN</p>
           <h2>How the random color roll works</h2>
-          <p>For every roll, the browser uses its built-in cryptographic random number generator to select a color for each die. Red, orange, yellow, green, blue, and purple all have the same chance, and one die does not affect the next.</p>
-          <p>True random sequences often include repeats, so seeing the same color twice is expected. Your last result and roll count stay in local browser storage for convenience; the game does not require a player account or send your roll history to a server.</p>
+          <p>For each roll, the browser uses its built-in cryptographic random number generator to choose a color for every die. All six colors have the same chance, and one die does not affect the next.</p>
+          <p>Independent rolls sometimes repeat a color. The last result and roll count stay in local browser storage on your device. The game does not require an account or send your roll history to a server.</p>
         </div>
       </div>
     </section>
@@ -395,7 +374,7 @@
         <div>
           <p class="eyebrow">COMMON QUESTIONS</p>
           <h2>Color dice roller FAQ</h2>
-          <p>Quick answers about the dice, available colors, and random results.</p>
+          <p>Answers about the dice, modes, colors, and random results.</p>
         </div>
         <div class="faq-list">
           <details open>
@@ -404,7 +383,7 @@
           </details>
           <details>
             <summary>How do I roll color dice online?</summary>
-            <p>Choose between one and six dice, then press “Roll Again.” The random colors appear immediately.</p>
+            <p>Choose between one and six dice, then press "Roll Again." The random colors appear after a short animation.</p>
           </details>
           <details>
             <summary>Is the color dice roller free?</summary>
@@ -428,7 +407,7 @@
 
     <section class="content-band explore-band">
       <div class="content-container">
-        <p class="eyebrow">TRY A NEW SETUP</p>
+        <p class="eyebrow">MORE WAYS TO PLAY</p>
         <h2>Turn one roll into a complete activity</h2>
         <div class="explore-links">
           <a href="#color-values"><span>Create a six-color rule set</span><small>Give every color a clear action before the first roll</small><strong aria-hidden="true">→</strong></a>
@@ -446,6 +425,10 @@
         <a href="#how-to-use">How to use</a>
         <a href="#color-values">Color ideas</a>
         <a href="#faq">FAQ</a>
+        <a href="/en/about/">About</a>
+        <a href="/en/contact/">Contact</a>
+        <a href="/en/privacy/">Privacy</a>
+        <a href="/en/terms/">Terms</a>
         <a href="/" lang="ru" hreflang="ru">Русский</a>
       </nav>
       <p>© 2026 Color Dice</p>
@@ -453,6 +436,6 @@
   </footer>
 
   <noscript><p class="noscript">Enable JavaScript to use the Color Dice roller. The guide and game ideas below are still available without JavaScript.</p></noscript>
-  <script src="/app.js?v=20260712-1" defer></script>
+  <script src="/app.js?v=20260716-1" defer></script>
 </body>
 </html>
