@@ -23,6 +23,7 @@ Open `http://127.0.0.1:4173/` for Russian or `http://127.0.0.1:4173/en/` for Eng
 - `o-proekte/`, `kontakty/`, `privacy/`, `terms/`: Russian trust pages marked `noindex, follow`.
 - `en/about/`, `en/contact/`, `en/privacy/`, `en/terms/`: matching English trust pages marked `noindex, follow`.
 - `robots.txt` and `sitemap.xml`: discovery files. The sitemap includes the four indexable URLs.
+- `ads.txt`: the owner-supplied AdSense authorized-seller record, served from the root domain.
 - `assets/`: local fonts with their OFL license notice, favicon, and separate 1200x630 Russian and English Open Graph images.
 - `output/`: local browser, game-client, and Lighthouse verification artifacts. It is not required at runtime.
 
@@ -67,7 +68,7 @@ Static checks rerun on 2026-07-18 during the seventh AdSense review:
 - All 13 files have one H1 and no duplicate IDs. All four JSON-LD blocks parse, and the Russian and English FAQ markup matches the visible questions and answers.
 - The 185 anchor instances contain no broken local route or fragment. The five external destinations used by page copy were reachable through the web check, and no page uses `nofollow`.
 - Sitemap URLs exactly match the four `index, follow` canonicals. The eight trust pages remain `noindex, follow` and stay out of the sitemap.
-- The two privacy pages now state the advertising-cookie disclosures required before AdSense is enabled. No ad code, publisher placeholder, or `ads.txt` entry is present.
+- The two privacy pages now state the advertising-cookie disclosures required before AdSense is enabled. No ad code or placeholder publisher value is present. The root `ads.txt` uses the real record designated by the owner; it does not by itself connect the site to AdSense or indicate approval.
 
 The seventh review also completed a fresh dynamic run on 2026-07-18 through a local HTTP server and real Chrome. Both languages passed the normal roll, six-die Mega Roll, six keyboard Scratch reveals, theme and sound changes, and reload-based state restoration. Desktop and 390px mobile pages had no horizontal overflow, and the tested contexts produced no console warnings, console errors, or page errors. The standard web-game client also completed on both homepages; its canvas-only screenshots were not used as layout evidence.
 

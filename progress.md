@@ -60,12 +60,12 @@ Codex seventh review (2026-07-18): independently counter-review Claude's sixth r
 - The fifth review rejects absolute phrases such as "fully compliant" or "the only blocker." Repository checks cannot verify account eligibility, actual traffic, audience classification, rights to any reference-derived design, the final ad layout, CMP configuration, or Google's decision.
 - The seventh review found no new Russian or English user-visible copy that needed rewriting. The humanizer pass found no clustered promotional, mechanical, inflated, or chatbot-style wording, so the existing copy and keyword placement were left unchanged.
 - Claude's sixth-round interaction results were independently reproduced. Its claim that two consecutive rounds had already found no new code or content problem was premature because the fifth round had found three; the sixth and seventh rounds now supply the two consecutive clean reviews.
+- The owner designated the real AdSense seller record from ToonTone and it is now present at the repository root as `ads.txt`. This authorizes the listed seller only; it does not add ad code, connect the domain to AdSense, or prove site approval.
 
 ## Remaining work
 
-- The reviewed workspace is still uncommitted: `HEAD` and `origin/main` both point to `229a45b`. Commit, push, deploy, and post-deployment checks remain outside this review because the user expressly prohibited those actions.
-- Add the real AdSense publisher ID or verification meta tag from the owner's account. Do not use a placeholder.
-- Add `ads.txt` only after the account provides the exact `pub-...` line.
+- The reviewed AdSense and SEO changes have been merged into `main` and deployed. The root `ads.txt` now contains the owner-designated, non-placeholder publisher record.
+- In AdSense, confirm that this domain belongs to the same publisher account as the listed `pub-...` ID and check the site's connection and review status. The repository cannot verify those account-level facts, and `ads.txt` alone does not mean the site is connected or approved.
 - Configure a Google-certified CMP in AdSense before serving personalized ads in the EEA, UK, or Switzerland.
 - Decide whether the actual audience requires child-directed treatment. This is an owner decision based on real users, not a code default.
 - Confirm that the owner has the right to use any visual design or assets derived from the reference site. The repository can verify the bundled font licenses, but it cannot prove permission from a third-party rightsholder.

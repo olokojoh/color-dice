@@ -508,3 +508,21 @@ Codex 第五轮的三项修复可以保留：两份隐私政策已覆盖 Google 
 | E. 部署前还剩什么 | 先由所有者审批工作区，然后在允许的流程中 commit、push、部署。部署后重查生产路由、trust pages、robots、sitemap、redirect、canonical、hreflang、404、浏览器与 Lighthouse。之后使用真实 AdSense 账户连接信息，根据真实发布商记录创建 `ads.txt`，完成 CMP、儿童受众、账户唯一性、权利、历史外链、流量质量和最终广告位置检查 |
 
 结论只限于仓库和本轮可验证证据。它不等于“完全符合”，也不保证 Google 批准。本轮没有 commit、push、部署、登录 AdSense、添加占位 publisher ID 或 `ads.txt`，也没有恢复自动评论或建链。
+
+## ads.txt 上线补充（2026-07-19）
+
+所有者已指定 `/Users/reyn/Desktop/data/独立开发/toon-tone/public/ads.txt` 为真实记录来源。该文件与 ToonTone 的 `dist/ads.txt` 字节一致，SHA-256 均为 `9abf690d7ae28509f0b84002ff98a149f086ac24dc36c349b067737c49009936`。Color Dice 现已在仓库根目录加入同字节的 `ads.txt`：
+
+```text
+google.com, pub-6112182006844125, DIRECT, f08c47fec0942fa0
+```
+
+这条记录符合 Google 当前指南使用的四字段格式：`google.com` 是卖方系统域名，第二字段是所有者提供的非占位 `pub-` 发布商 ID，`DIRECT` 表示发布商直接控制该账户，`f08c47fec0942fa0` 是 Google 示例和记录使用的认证机构 ID。文件位于站点根目录，因此发布后应直接出现在 `https://xn--80ahqbfrbqm.com/ads.txt`。Google 还要求该 URL 可抓取并返回 HTTP 200，不能由不存在页面的 HTML fallback 冒充。
+
+官方依据：
+
+- [Google AdSense ads.txt guide](https://support.google.com/adsense/answer/12171612?hl=en) 给出的标准记录是 `google.com, pub-..., DIRECT, f08c47fec0942fa0`，并要求把纯文本文件放在根目录，例如 `example.com/ads.txt`。
+- [Ensure your ads.txt files can be crawled](https://support.google.com/adsense/answer/7679060?hl=en) 要求根域名上的文件可访问、允许抓取、没有格式或无效字符，并返回 HTTP 200。
+- [Connect your site to AdSense](https://support.google.com/adsense/answer/7584263?hl=en) 将 ads.txt 作为连接方式之一，同时说明站点仍需完成连接和审核，获批前不能展示广告。
+
+本节更新的是当前仓库状态；前面各轮“当时尚无 `ads.txt`”和“不要添加占位值”的记录仍作为历史证据保留，不应再被理解为当前待办。加入真实 `ads.txt` 只声明授权卖方，不等于广告代码已经接入，也不等于站点已连接或通过审核。AdSense 后台仍需确认该域名属于与 `pub-6112182006844125` 相同的发布商账户，并确认站点连接、ads.txt 抓取和审核状态。
