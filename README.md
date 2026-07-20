@@ -52,7 +52,7 @@ Production uses the Cloudflare Pages project `color-dice`, linked to the reposit
 
 The Cloudflare zone is active with `terry.ns.cloudflare.com` and `zita.ns.cloudflare.com`. The apex is the only Pages content domain. Proxied apex and `www` CNAME records target `color-dice-4uo.pages.dev`; an active Cloudflare 301 rule redirects `www` to the apex while preserving the path and query string. HTTP redirects to HTTPS.
 
-Google Search Console uses the domain property `sc-domain:xn--80ahqbfrbqm.com`, verified through a persistent Cloudflare DNS TXT record. `https://xn--80ahqbfrbqm.com/sitemap.xml` is submitted successfully and reports four discovered pages.
+Google Search Console uses the domain property `sc-domain:xn--80ahqbfrbqm.com`, verified through a persistent Cloudflare DNS TXT record. The sitemap is `https://xn--80ahqbfrbqm.com/sitemap.xml`; Cloudflare Pages applies explicit XML/text content types and one-hour revalidation headers through `_headers`.
 
 Contact is handled through the public issue tracker at `https://github.com/olokojoh/color-dice/issues`. The previous `hello@colordice.app` address was removed because the domain has no mail exchange record. If the deployment origin changes, update canonical, hreflang, Open Graph, JSON-LD, sitemap, and robots URLs together; the full list is in `SEO.md`.
 
