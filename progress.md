@@ -28,11 +28,13 @@ Codex seventh review (2026-07-18): independently counter-review Claude's sixth r
 - Cloudflare zone `колордайс.com` is active in account `cbc3bde77f12dad362c481794bb7e314`. Its assigned nameservers are `terry.ns.cloudflare.com` and `zita.ns.cloudflare.com`; Namecheap and the `.com` registry use this pair.
 - The apex Pages custom domain is active. Proxied apex and `www` CNAME records target `color-dice-4uo.pages.dev`; Page Rule `244c375c77ff6dd743b1a96f98c7b1bb` redirects `www` to the apex with HTTP 301 while preserving path/query. HTTP requests redirect to HTTPS.
 - GitHub push `45f7478` triggered production deployment `cce3c4d8-823e-495d-8d4c-f1a68ff05ac6`, which completed successfully. No direct upload deployment was used.
-- July 18 production verification: apex `/`, `/en/`, `/robots.txt`, and `/sitemap.xml` returned HTTPS 200; `www` and HTTP requests redirected to the apex. `/en/privacy/` still returned 404, and the homepage still contained the old start screen and player-code panel.
-- A 2026-07-13 source audit confirmed that production was static HTML rather than CSR: browser and Googlebot received identical responses. Current local changes have not been deployed as part of this review.
+- July 18 production verification: apex `/`, `/en/`, `/robots.txt`, and `/sitemap.xml` returned HTTPS 200; `www` and HTTP requests redirected to the apex. `/en/privacy/` still returned 404, and the homepage still contained the old start screen and player-code panel. Later pushes closed this gap.
+- July 27 production verification (Mode B run `20260727-colordice-modeb-8438dc9`): `HEAD` and `origin/main` both point to `8438dc9`. All 12 HTML routes, `/robots.txt`, `/sitemap.xml`, the seller record, and both Open Graph images returned HTTPS 200 and byte-matched that commit; an unknown route returned 404.
+- A 2026-07-13 source audit confirmed that production was static HTML rather than CSR: browser and Googlebot received identical responses. The workspace and deployment both changed after that audit.
 - Google Search Console domain property `sc-domain:xn--80ahqbfrbqm.com` was created and verified on 2026-07-12 using Cloudflare DNS TXT record `6b56879f69f8d91f35dbaeece6e6da27`. Keep this TXT record to retain ownership.
 - `https://xn--80ahqbfrbqm.com/sitemap.xml` briefly showed `Sitemap could not be read` with one `General HTTP error`, last read Jul 15. Direct Googlebot, IPv4, and IPv6 requests returned HTTP 200 and valid XML. After the main branch deployed explicit sitemap/robots response headers through `_headers`, GSC resubmission succeeded on 2026-07-20; the current status is `Success`, last read Jul 20, with four discovered pages and zero videos.
 - The OAuth refresh token in `/Users/reyn/Desktop/data/独立开发/toon-tone/gsc-ga4-auth/oauth_token.json` returned `invalid_grant` and remains untouched. Search Console setup used the already signed-in owner browser session instead; no credentials were copied into this repository.
+- On 2026-07-27, the Mode B implementation phase fixed the three `/pravila/` color-table labels, set the Article `dateModified` to 2026-07-27, corrected the Russian preview alt text on three pages, rewrote the unclear trial-roll sentence on `/kak-igrat/`, renamed the English scratch overlay title to `SCRATCH CARD`, and regenerated `assets/color-dice-og.jpg` from the current English page. These edits are uncommitted, are not deployed, and await opposite-agent review; run artifacts live in `.hermes/runs/20260727-colordice-modeb-8438dc9/`.
 
 ## SEO decisions
 
@@ -64,7 +66,7 @@ Codex seventh review (2026-07-18): independently counter-review Claude's sixth r
 
 ## Remaining work
 
-- The reviewed AdSense and SEO changes have been merged into `main` and deployed. The root `ads.txt` now contains the owner-designated, non-placeholder publisher record.
+- The AdSense and SEO changes reviewed through 2026-07-18 are merged into `main` and deployed; a July 27 probe confirmed production serves commit `8438dc9`. The root `ads.txt` contains the owner-designated, non-placeholder publisher record. The uncommitted July 27 Mode B edits still need opposite-agent review and a separate deployment decision.
 - In AdSense, confirm that this domain belongs to the same publisher account as the listed `pub-...` ID and check the site's connection and review status. The repository cannot verify those account-level facts, and `ads.txt` alone does not mean the site is connected or approved.
 - Configure a Google-certified CMP in AdSense before serving personalized ads in the EEA, UK, or Switzerland.
 - Decide whether the actual audience requires child-directed treatment. This is an owner decision based on real users, not a code default.
