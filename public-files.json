@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "files": [
+    "404.html",
+    "_headers",
+    "ads.txt",
+    "app.js",
+    "assets/color-dice-og.jpg",
+    "assets/favicon.svg",
+    "assets/fonts/OFL.txt",
+    "assets/fonts/lilita-one.woff2",
+    "assets/fonts/nunito-cyrillic.woff2",
+    "assets/fonts/nunito-latin.woff2",
+    "assets/kolor-dais-og.png",
+    "en/about/index.html",
+    "en/contact/index.html",
+    "en/index.html",
+    "en/privacy/index.html",
+    "en/terms/index.html",
+    "index.html",
+    "kak-igrat/index.html",
+    "kontakty/index.html",
+    "o-proekte/index.html",
+    "pravila/index.html",
+    "privacy/index.html",
+    "robots.txt",
+    "site.webmanifest",
+    "sitemap.xml",
+    "styles.css",
+    "terms/index.html"
+  ]
+}
