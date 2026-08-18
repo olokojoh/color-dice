@@ -48,6 +48,7 @@ Adsterra integration (2026-08-18): use the owner's authenticated publisher accou
 - The 2026-08-18 static verification passed `html-validate` for all 13 HTML files, `node --check app.js`, both XML parses, `git diff --check`, and the allowlisted 27-file Pages build. Only `dist/index.html` and `dist/en/index.html` contain the Adsterra placement key, and no cookie-file name or session-cookie marker appears in `dist`.
 - The required web-game client completed a normal roll on both languages with no error artifact. A separate browser run completed the six-die Mega Roll, revealed all six Scratch cards by keyboard, changed theme and sound, and returned both pages to `mode: ready` without page errors. Desktop and 390px screenshots show the labeled 300x250 slot outside the game stage; both mobile documents kept `scrollWidth === clientWidth === 390`.
 - The Adsterra `invoke.js` request returned HTTP 200 in local Chromium. No creative iframe was filled on localhost, so the gray reserved slot is expected in local screenshots; actual ad fill remains a hosted-origin verification item.
+- GitHub `dev` commit `8b97074` triggered `https://dev.color-dice-4uo.pages.dev/`. The preview contains GA4, one Adsterra slot, and the updated English privacy disclosure. `/0818cookie.txt` renders the site 404 and contains neither of the checked session-cookie markers. The preview did not receive a creative iframe, so production-domain fill remains unverified.
 
 ## SEO decisions
 
