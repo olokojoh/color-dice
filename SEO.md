@@ -45,10 +45,11 @@ Every indexable page has a unique title, description, H1, self-canonical, page-a
 - Local WOFF2 fonts remove third-party font requests. `assets/fonts/OFL.txt` carries the Lilita One and Nunito copyright notices and SIL OFL 1.1 terms.
 - The Russian Open Graph image is `/assets/kolor-dais-og.png`; the English 1200x630 image is `/assets/color-dice-og.jpg`.
 - Below-fold content remains fully rendered in browser screenshots and is present in the original HTML response.
+- One labeled 300x250 Adsterra banner appears after the introductory content on each homepage. It is outside the game stage, does not replace crawlable copy, and is absent from trust pages, supporting articles, and the 404 page.
 - The background canvas is decorative and `aria-hidden`; dice results have text alternatives and live status.
 - The game has no entry gate. Visitors and reviewers see the working tool immediately, and the first full-screen transition occurs only after a roll button is pressed.
 - English visitors can reach native About, Contact, Privacy, and Terms pages from the homepage footer.
-- AdSense review decisions and official policy links are maintained in `ADSENSE_REVIEW.md`. The root `ads.txt` contains the seller record designated by the owner. No ad unit, site-verification placeholder, or fake seller entry is committed.
+- AdSense review decisions and official policy links are maintained in `ADSENSE_REVIEW.md`. The root `ads.txt` contains the seller record designated by the owner. The separate Adsterra banner placement is recorded in `README.md` and `progress.md`.
 - Cloudflare Pages releases must use build command `node build-pages.mjs` and build output directory `dist`, not the repository root. The script rebuilds the artifact from `public-files.json`, so repository documents, build files, `.gitignore`, local output, and run evidence are absent. Deployment and production verification are separate release steps.
 - A production deployment commit must be reachable from the remote GitHub `main` ref. Promoting a `dev` preview can make Pages report branch `main` while serving a commit that GitHub `main` does not contain, so preview promotion is not an accepted release path.
 - Cloudflare custom rule `67fbadca144f456796089265951f45ec` blocks the eight repository-only paths listed in `README.md` before they reach Pages. This is a delivery safeguard for stale exact-URL objects, not an SEO landing-page rule; none of those paths belongs in the sitemap or internal navigation.

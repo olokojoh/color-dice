@@ -12,6 +12,8 @@ Codex seventh review (2026-07-18): independently counter-review Claude's sixth r
 
 Production exposure repair (2026-07-28): remove access to repository-only files after the allowlisted `dist` deployment left exact custom-domain URLs available through stale Cloudflare Pages cache; audit and remove unsafe historical deployments; add an outer-zone block rule; verify public routes and preserve the operational evidence.
 
+Adsterra integration (2026-08-18): use the owner's authenticated publisher account to connect the existing approved site and ad unit to the project, verify the result, and push the reviewed source to `dev` without deploying `main`.
+
 ## Current state
 
 - The workspace started empty on 2026-07-11.
@@ -41,6 +43,11 @@ Production exposure repair (2026-07-28): remove access to repository-only files 
 - The OAuth refresh token in `/Users/reyn/Desktop/data/独立开发/toon-tone/gsc-ga4-auth/oauth_token.json` returned `invalid_grant` and remains untouched. Search Console setup used the already signed-in owner browser session instead; no credentials were copied into this repository.
 - On 2026-07-27, the Mode B implementation phase fixed the three `/pravila/` color-table labels, set the Article `dateModified` to 2026-07-27, corrected the Russian preview alt text on three pages, rewrote the unclear trial-roll sentence on `/kak-igrat/`, renamed the English scratch overlay title to `SCRATCH CARD`, and regenerated `assets/color-dice-og.jpg` from the current English page. At the 2026-07-28 pre-release check, these edits were on `dev` at `e0135fc` and had not been deployed.
 - The July 28 R03 repair sets all four sitemap `lastmod` values to 2026-07-27 and corrects stale repository-state claims. The local R06 and R09 worker approach was not deployed and is removed in R13. R13 uses `node build-pages.mjs` and `public-files.json` to build an allowlisted `dist/` without repository documents, build files, local output, or run evidence. The allowlisted artifact is now deployed; the zone-level WAF rule remains necessary because a stale Pages exact-URL object survived a clean deployment, successful custom purge, and source-deployment deletion. Run artifacts live in `.hermes/runs/20260728-colordice-adsense-recheck-e0135fc/`.
+- The 2026-08-18 Adsterra dashboard already contained approved website `xn--80ahqbfrbqm.com` (ID `5991218`) and ten active units. The integration uses only `Banner 300x250` unit `30802651`, placement key `e5e53cf5c01da04ef27ba6b74eb38936`, once on each homepage after the introductory section. Popunder, Social Bar, Smartlink, and the other units remain unused.
+- `0818cookie.txt` supplied the owner's Adsterra and Cloudflare session for this setup. It stays local, is explicitly ignored by Git, and must never be committed or copied into project documentation.
+- The 2026-08-18 static verification passed `html-validate` for all 13 HTML files, `node --check app.js`, both XML parses, `git diff --check`, and the allowlisted 27-file Pages build. Only `dist/index.html` and `dist/en/index.html` contain the Adsterra placement key, and no cookie-file name or session-cookie marker appears in `dist`.
+- The required web-game client completed a normal roll on both languages with no error artifact. A separate browser run completed the six-die Mega Roll, revealed all six Scratch cards by keyboard, changed theme and sound, and returned both pages to `mode: ready` without page errors. Desktop and 390px screenshots show the labeled 300x250 slot outside the game stage; both mobile documents kept `scrollWidth === clientWidth === 390`.
+- The Adsterra `invoke.js` request returned HTTP 200 in local Chromium. No creative iframe was filled on localhost, so the gray reserved slot is expected in local screenshots; actual ad fill remains a hosted-origin verification item.
 
 ## SEO decisions
 
@@ -78,4 +85,5 @@ Production exposure repair (2026-07-28): remove access to repository-only files 
 - Decide whether the actual audience requires child-directed treatment. This is an owner decision based on real users, not a code default.
 - Confirm that the owner has the right to use any visual design or assets derived from the reference site. The repository can verify the bundled font licenses, but it cannot prove permission from a third-party rightsholder.
 - Check any previously published automated comments and inbound links outside the repository. The local outreach scripts are deleted, but the repository cannot retract third-party posts.
+- After peer review, merge `dev` into `main` to deploy the Adsterra banner. Verify the production banner on both homepages and monitor unit `30802651` in the Adsterra statistics dashboard.
 - Before Cloudflare setup, the reference deployment at `https://colordice.vercel.app/` served the original `Roll Color Dice - Bongo` site; it is not the production target for this repository.

@@ -1186,6 +1186,34 @@ a {
   font-size: 19px;
 }
 
+.ad-band {
+  padding: 48px 10px 72px;
+  border-bottom: 1px solid #dfe7ef;
+  background: #fff;
+}
+
+.ad-slot {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ad-label {
+  margin: 0 0 8px;
+  color: #6b7c8d;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.ad-frame {
+  width: 300px;
+  min-height: 250px;
+  overflow: hidden;
+  background: #f4f7fa;
+}
+
 .steps-grid,
 .color-grid {
   display: grid;

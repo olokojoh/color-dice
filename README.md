@@ -24,6 +24,7 @@ Open `http://127.0.0.1:4173/` for Russian or `http://127.0.0.1:4173/en/` for Eng
 - `en/about/`, `en/contact/`, `en/privacy/`, `en/terms/`: matching English trust pages marked `noindex, follow`.
 - `robots.txt` and `sitemap.xml`: discovery files. The sitemap includes the four indexable URLs.
 - `ads.txt`: the owner-supplied AdSense authorized-seller record, served from the root domain.
+- `GA4.md`: the Google Analytics property, stream, measurement ID, and deployment check.
 - `assets/`: local fonts with their OFL license notice, favicon, and separate 1200x630 Russian and English Open Graph images.
 - `output/`: local browser, game-client, and Lighthouse verification artifacts. It is not required at runtime.
 
@@ -40,7 +41,13 @@ The game uses `crypto.getRandomValues` and selects every die independently from 
 - `kolor_dais_roll_count`
 - `kolor_dais_last_result`
 
-There is no server API, account system, analytics, or advertising code. The privacy pages explain the disclosures and consent work required before AdSense is enabled.
+There is no server API or account system. Google Analytics measurement ID `G-TGBK3WV226` is present in every HTML document. The Russian and English homepages each include one Adsterra 300x250 banner after the introductory content; game results and local preferences are not sent to either service.
+
+## Advertising
+
+Adsterra already contains the approved site `xn--80ahqbfrbqm.com` (website ID `5991218`). The source uses its active `Banner 300x250` unit `30802651`, whose placement key is `e5e53cf5c01da04ef27ba6b74eb38936`. The exact dashboard code is embedded once in `index.html` and once in `en/index.html`.
+
+The banner is labeled `Advertisements` and appears after the introductory content, outside the interactive game stage. Popunder, Social Bar, Smartlink, and the other existing Adsterra units are not used. Trust pages and `404.html` contain no advertising. The local `0818cookie.txt` session file is ignored by Git and must never be committed.
 
 Automated game clients can read `window.render_game_to_text()` and advance the background animation with `window.advanceTime(ms)`.
 
@@ -74,7 +81,7 @@ Static checks rerun on 2026-07-18 during the seventh AdSense review:
 - All 13 files have one H1 and no duplicate IDs. All four JSON-LD blocks parse, and the Russian and English FAQ markup matches the visible questions and answers.
 - The 185 anchor instances contain no broken local route or fragment. The five external destinations used by page copy were reachable through the web check, and no page uses `nofollow`.
 - Sitemap URLs exactly match the four `index, follow` canonicals. The eight trust pages remain `noindex, follow` and stay out of the sitemap.
-- The two privacy pages now state the advertising-cookie disclosures required before AdSense is enabled. No ad code or placeholder publisher value is present. The root `ads.txt` uses the real record designated by the owner; it does not by itself connect the site to AdSense or indicate approval.
+- The two privacy pages disclose the live Adsterra banner, link to Adsterra's privacy and cookie policies, and retain the disclosures required before AdSense is enabled. The root `ads.txt` uses the real AdSense record designated by the owner; it does not by itself connect the site to AdSense or indicate approval.
 
 The seventh review also completed a fresh dynamic run on 2026-07-18 through a local HTTP server and real Chrome. Both languages passed the normal roll, six-die Mega Roll, six keyboard Scratch reveals, theme and sound changes, and reload-based state restoration. Desktop and 390px mobile pages had no horizontal overflow, and the tested contexts produced no console warnings, console errors, or page errors. The standard web-game client also completed on both homepages; its canvas-only screenshots were not used as layout evidence.
 
@@ -83,3 +90,5 @@ Lighthouse 13.4.0 scored both homepages at Performance 99, Accessibility 100, Be
 A production check on 2026-07-18 found the deployment behind the workspace: `/en/privacy/` returned 404 and the live homepage still contained the removed start screen and player-code panel. Later pushes closed that gap. A 2026-07-28 pre-release read-only probe found production serving `main` at `8438dc9` for the changed indexable pages, not `dev` at `e0135fc`. During that pre-release review, the R03 sitemap and handoff fixes and the R13 build-output repair had not been deployed. R13 replaced the undeployed R06 and R09 worker approach with the build-output design above. Those review phases did not perform a commit, push, deployment, or AdSense account action.
 
 The July 28 production repair verified Pages build command `node build-pages.mjs`, destination `dist`, and clean production deployment `234acdea-c625-47ff-8df2-22f5c5310621`. Thirteen older deployments that returned repository files were removed through the Pages API; clean preview `8e1d012d-fd07-407d-8e2b-25b86725593c` was retained. The corrective GitHub `main` push at `2af644f` then created production deployment `f752ec96-831f-4cc0-ab44-a5a5e63833f0` through a complete clone/build/deploy, restoring agreement between production and the remote source-of-truth branch. Cloudflare continued serving a removed immutable deployment hostname with `max-age=0, must-revalidate`, even though the deployment no longer appeared in the project list. The account does not control the `pages.dev` zone, so immediate removal of that residual hostname requires Cloudflare Support or deletion of the Pages project; neither is required to protect the custom production domain. Final probes returned 403 for all eight guarded custom-domain paths, 404 on the current `pages.dev` deployment, and 200 for the homepage, English homepage, robots, sitemap, and favicon.
+
+The 2026-08-18 Adsterra integration passed `html-validate` on all 13 HTML files, JavaScript and XML checks, the allowlisted 27-file Pages build, and a scan confirming that the local session-cookie file is absent from `dist`. Both languages passed a normal roll and the full six-die Mega Roll and keyboard Scratch Card flows, followed by theme and sound changes. At 390px the document width stayed at 390px, each homepage contained exactly one 300x250 ad slot, and the browser reported no page errors. The Adsterra script returned HTTP 200 locally, but no creative iframe was filled on the localhost origin; verify actual fill on an approved hosted origin after deployment.
