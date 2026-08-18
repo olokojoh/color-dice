@@ -529,6 +529,6 @@ google.com, pub-6112182006844125, DIRECT, f08c47fec0942fa0
 
 ## Adsterra 格式扩展说明（2026-08-18）
 
-`dev` 审核版按所有者要求启用了 Adsterra Banner、Popunder、Social Bar 和 Smartlink。Banner 与明确标注的 Smartlink 位于游戏区之后；Smartlink 在新标签页打开，不替换当前游戏页面。Popunder 会在用户交互后另开广告标签页或窗口，Social Bar 可能显示页面边缘浮层，这是两种格式本身的行为，不能沿用本报告早期“无弹窗、无覆盖式广告”的假设。
+`dev` 审核版按所有者要求启用了 Adsterra Banner、Popunder、Social Bar 和 Smartlink。Banner 与明确标注的 Smartlink 位于游戏卡旁边，移动端紧接游戏卡之后，但不属于按钮、结果或覆盖层等交互容器；Smartlink 在新标签页打开，不替换当前游戏页面。Popunder 会在用户交互后另开广告标签页或窗口，Social Bar 可能显示页面边缘浮层，这是两种格式本身的行为，不能沿用本报告早期“无弹窗、无覆盖式广告”的假设。
 
 这次变更不代表 AdSense 兼容性已重新确认。若未来同时申请或启用 AdSense，应根据当时实际页面重新评估 Google 的干扰性广告、意外点击和广告数量要求。

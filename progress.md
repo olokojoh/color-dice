@@ -16,6 +16,8 @@ Adsterra integration (2026-08-18): use the owner's authenticated publisher accou
 
 Adsterra format expansion (2026-08-18): enable the existing Popunder, Social Bar, and Smartlink units alongside the banner, enrich the sponsored section without obstructing the game, verify both languages and mobile layout, and push the new review build to `dev`.
 
+Adsterra placement revision (2026-08-18): move the visible Banner and Smartlink into the game-entry sightline, keeping them adjacent to but outside the interactive game card, then rerun responsive and interaction verification before updating `dev`.
+
 ## Current state
 
 - The workspace started empty on 2026-07-11.
@@ -55,6 +57,8 @@ Adsterra format expansion (2026-08-18): enable the existing Popunder, Social Bar
 - Popunder and Social Bar load asynchronously so their external requests do not block HTML parsing. The richer sponsored section stays after the introductory copy and outside the game stage; Smartlink opens only from its labeled button in a new tab with `rel="sponsored noopener noreferrer"`.
 - The required web-game client completed both languages without an error artifact. A separate Playwright run completed a normal six-die roll, full Mega Roll, six keyboard Scratch reveals, theme change, and sound change on both pages. Desktop and 390px full-page screenshots were inspected. Both mobile pages kept `scrollWidth === clientWidth === 390`, the card stayed within the viewport, the banner measured 300×250, and there were no page errors.
 - GitHub `dev` commit `192685a` triggered the updated branch preview. Both homepages returned 200 and each contained exactly one Banner, Popunder, Social Bar, and Smartlink placement. The English privacy page returned 200 with the four-format disclosure. `/0818cookie.txt` returned 404 and its response contained no checked session marker. Campaign fill and Popunder/Social Bar behavior on the approved custom domain remain post-review production checks.
+- The placement revision moves the Banner and Smartlink from the separate below-copy section into a labeled 300px rail within the first game-stage layout. Wide screens use `color legend | game card | advertising rail`; medium screens keep the game and rail side by side with the legend below; mobile orders the game card, advertising rail, then legend. The rail is a sibling of the game card, never a child or overlay of the controls or result area.
+- Placement verification passed at 1280px, 1024px, and 390px in both languages. The ad rail and game shared the first visual stage at desktop and tablet widths; mobile showed the top of the ad immediately after the game card. Every viewport kept `scrollWidth === clientWidth`, the 300×250 frame fit fully inside its rail, and geometry checks found no overlap with the game card or Roll button. Fresh six-die normal, Mega, and six-card keyboard Scratch runs returned to `mode: ready` with every overlay closed and no page error.
 
 ## SEO decisions
 
