@@ -526,3 +526,9 @@ google.com, pub-6112182006844125, DIRECT, f08c47fec0942fa0
 - [Connect your site to AdSense](https://support.google.com/adsense/answer/7584263?hl=en) 将 ads.txt 作为连接方式之一，同时说明站点仍需完成连接和审核，获批前不能展示广告。
 
 本节更新的是当前仓库状态；前面各轮“当时尚无 `ads.txt`”和“不要添加占位值”的记录仍作为历史证据保留，不应再被理解为当前待办。加入真实 `ads.txt` 只声明授权卖方，不等于广告代码已经接入，也不等于站点已连接或通过审核。AdSense 后台仍需确认该域名属于与 `pub-6112182006844125` 相同的发布商账户，并确认站点连接、ads.txt 抓取和审核状态。
+
+## Adsterra 格式扩展说明（2026-08-18）
+
+`dev` 审核版按所有者要求启用了 Adsterra Banner、Popunder、Social Bar 和 Smartlink。Banner 与明确标注的 Smartlink 位于游戏区之后；Smartlink 在新标签页打开，不替换当前游戏页面。Popunder 会在用户交互后另开广告标签页或窗口，Social Bar 可能显示页面边缘浮层，这是两种格式本身的行为，不能沿用本报告早期“无弹窗、无覆盖式广告”的假设。
+
+这次变更不代表 AdSense 兼容性已重新确认。若未来同时申请或启用 AdSense，应根据当时实际页面重新评估 Google 的干扰性广告、意外点击和广告数量要求。

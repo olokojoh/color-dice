@@ -1187,14 +1187,110 @@ a {
 }
 
 .ad-band {
-  padding: 48px 10px 72px;
+  position: relative;
+  overflow: hidden;
+  padding: 62px 24px;
   border-bottom: 1px solid #dfe7ef;
-  background: #fff;
+  background: linear-gradient(135deg, #eff9ff 0%, #f7f2ff 52%, #fff8dc 100%);
+}
+
+.ad-band::before,
+.ad-band::after {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  content: "";
+  filter: blur(4px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.ad-band::before {
+  top: -170px;
+  left: -90px;
+  background: #63c7f0;
+}
+
+.ad-band::after {
+  right: -110px;
+  bottom: -190px;
+  background: #d98af2;
+}
+
+.ad-panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 880px);
+  align-items: center;
+  gap: 54px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  margin: 0 auto;
+  padding: 34px;
+  border: 1px solid rgba(111, 151, 185, 0.25);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 50px rgba(42, 76, 110, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.sponsor-card h2 {
+  margin: 0 0 14px;
+  color: #102a43;
+  font-family: var(--display-font);
+  font-size: 30px;
+  line-height: 1.08;
+}
+
+.sponsor-card > p:not(.ad-label) {
+  margin: 0 0 18px;
+  color: #4a6074;
+  font-size: 15px;
+}
+
+.sponsor-features {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.sponsor-features span {
+  padding: 7px 10px;
+  border: 1px solid #d7e5ef;
+  border-radius: 999px;
+  color: #245279;
+  background: #f5fbff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.sponsor-link {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #126ca5, #7146b5);
+  box-shadow: 0 9px 22px rgba(65, 78, 164, 0.22);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.sponsor-link:hover {
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(65, 78, 164, 0.3);
+  transform: translateY(-2px);
 }
 
 .ad-slot {
   width: 300px;
-  margin: 0 auto;
   text-align: center;
 }
 
@@ -1211,7 +1307,39 @@ a {
   width: 300px;
   min-height: 250px;
   overflow: hidden;
+  border-radius: 14px;
   background: #f4f7fa;
+  box-shadow: 0 8px 24px rgba(34, 60, 86, 0.12);
+}
+
+@media (max-width: 760px) {
+  .ad-band {
+    padding: 44px 10px;
+  }
+
+  .ad-panel {
+    width: min(100%, 430px);
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 28px 14px;
+  }
+
+  .sponsor-card {
+    padding: 0 8px;
+    text-align: center;
+  }
+
+  .sponsor-card h2 {
+    font-size: 27px;
+  }
+
+  .sponsor-features {
+    justify-content: center;
+  }
+
+  .ad-slot {
+    justify-self: center;
+  }
 }
 
 .steps-grid,
